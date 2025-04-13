@@ -1,10 +1,16 @@
+main {
+    padding: 0.5rem;
+}
+
 /* trying out nested selectors */
 main section {
-    margin: 0.5rem;
+    margin: auto;
     padding: 1rem;
     border-radius: 2rem;
     backdrop-filter: blur(64px);
     background: color(from var(--text-400) srgb r g b / 0.1);
+
+    max-width: 40rem;
 
     /* big header on top */
     h1 {
@@ -16,7 +22,7 @@ main section {
 
     /* style articles inside our section */
     & article {
-        
+
         /* setup our layout */
         display: grid;
         grid-template-columns: 16rem 1fr;
