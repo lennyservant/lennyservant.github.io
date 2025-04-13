@@ -1,0 +1,64 @@
+/* setup layout */
+main {
+    display: grid;
+    gap: 2rem;
+    grid: 
+    "greeters greeters greeters"
+    ". links .";
+}
+
+/* setup grid areas to use */
+.links {
+    grid-area: links;
+}
+
+.greeters {
+    grid-area: greeters;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* use a container so we can have a background */
+.greeters .container {
+    display: grid;
+    width: fit-content;
+    border-radius: 2rem;
+    backdrop-filter: blur(64px);
+    background: color(from var(--text-400) srgb r g b / 0.1);
+    padding: 1rem 3rem;
+}
+
+/* responsive font size w/ clamping */
+.greeters h1 {
+    font-size: clamp(2rem, 12vw, 8rem);
+}
+
+.greeters h2 {
+    font-size: clamp(1rem, 6vw, 4rem);
+}
+
+/* nav links below the greeter */
+.links nav {
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 1rem;
+    font-size: 2rem;
+}
+
+.links nav a {
+    border-radius: 1rem;
+    padding: 1rem;
+    background-color: var(--primary-600);
+}
+
+/* mobile specific styling */
+@media screen and (max-width: 480px) {
+    .links nav {
+        flex-direction: column;
+    }
+}

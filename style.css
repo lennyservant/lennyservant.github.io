@@ -1,0 +1,221 @@
+/* global styles for all pages */
+
+/* variables */
+:root {
+    /* color generated from https://www.realtimecolors.com */
+    --text: #f3f1f3;
+    --background: #070407;
+    --primary: #cf96d0;
+    --secondary: #7a277b;
+    --accent: #da4ddb;
+
+    --text-100: #e8e3e8;
+    --text-200: #d0c8d0;
+    --text-300: #b9acb9;
+    --text-400: #a191a1;
+    --text-500: #8a758a;
+    --text-600: #6e5e6e;
+    --text-700: #534653;
+    --text-800: #372f37;
+    --text-900: #1c171c;
+    --text-950: #0e0c0e;
+    
+    --background-50: #f6eff6;
+    --background-100: #ecdfec;
+    --background-200: #dabeda;
+    --background-300: #c79ec7;
+    --background-400: #b57db5;
+    --background-500: #a25da2;
+    --background-600: #824a82;
+    --background-700: #613861;
+    --background-800: #412541;
+    --background-900: #201320;
+    --background-950: #100910;
+    
+    --primary-50: #f7edf7;
+    --primary-100: #efdcef;
+    --primary-200: #dfb9df;
+    --primary-400: #be72c0;
+    --primary-500: #ae4fb0;
+    --primary-600: #8b3f8d;
+    --primary-700: #692f6a;
+    --primary-800: #462046;
+    --primary-900: #231023;
+    --primary-950: #110812;
+    
+    --secondary-50: #f9ecf9;
+    --secondary-100: #f2d8f3;
+    --secondary-200: #e6b1e7;
+    --secondary-300: #d98bda;
+    --secondary-400: #cc64ce;
+    --secondary-500: #c03dc2;
+    --secondary-600: #99319b;
+    --secondary-700: #732574;
+    --secondary-800: #4d184e;
+    --secondary-900: #260c27;
+    --secondary-950: #130613;
+    
+    --accent-50: #fbeafb;
+    --accent-100: #f6d5f6;
+    --accent-200: #eeaaee;
+    --accent-300: #e580e5;
+    --accent-400: #dc56dc;
+    --accent-500: #d42bd4;
+    --accent-600: #a923a9;
+    --accent-700: #7f1a7f;
+    --accent-800: #551155;
+    --accent-900: #2a092a;
+    --accent-950: #150415;
+}
+
+/* saner sizing mode */
+* { 
+    box-sizing: border-box;
+}
+
+/* make the page fill up the entire viewport; we dont want empty spaces at the bottom */
+body {
+    min-height: 100svh; /* use svh to account for mobile ui */
+}
+
+/* default text properties */
+* {
+    color: var(--text);
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: lighter;
+    text-decoration: none;
+}
+
+/* i've decided that i no longer want default margins on my headings */
+h1, h2, h3, h4, h5 {
+    margin: 0;
+}
+
+figure {
+    margin: 0;
+}
+
+/* header, main and footer styling */
+/* make areas for header, main, and footer */
+body {
+    display: grid;
+    grid-template-rows: min-content 1fr min-content;
+    grid-template-areas: "header"
+    "main"
+    "footer";
+}
+
+/* header area */
+header {
+    grid-area: header;
+    background: var(--background-900);
+    display: flex;
+    justify-content: center;
+}
+
+/* nav bar */
+header nav {
+    display: flex;
+    align-items: stretch;
+    min-height: 3rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+}
+
+/* nav links */
+header nav {
+    & ul {
+        display: flex;
+        margin: 0;
+        padding: 0;
+        & li {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            list-style: none;
+        }
+    }
+}
+
+header nav :any-link {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    background: var(--background-900);
+}
+
+/* link subclasses */
+header nav :any-link:hover, nav a.current {
+    background: var(--accent-700);
+}
+
+header nav :any-link:active {
+    background: var(--accent-800);
+}
+
+main {
+    grid-area: main;
+    border-top: 1px solid var(--text-500);
+    border-bottom: 1px solid var(--text-500);
+}
+
+footer {
+    grid-area: footer;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    background: var(--background-900);
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-areas: ". license .";
+    display: grid;
+    min-height: 3rem;
+}
+
+footer .license {
+    min-width: 20rem;
+    grid-area: license;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* background; slight gradient that follows scroll */
+#background {
+    height: 100vh;
+    width: 100vw;
+    z-index: -256;
+    position: fixed;
+    display: block;
+    background: linear-gradient(to bottom, var(--background), var(--background-900));
+}
+
+/* background hover effect */
+#background-hover {
+    --x: 0vw;
+    --y: -50vh;
+    display: none;
+    position: fixed;
+    z-index: -255; /* render above the background*/
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--background-100);
+    box-shadow: color(from var(--background-100) srgb r g b / 0.2) 0 0 64px 64px;
+}
+
+body:hover #background-hover {
+    transform: translate(var(--x), var(--y));
+}
+
+/* only show the hover effect on media with hover support */
+@media (hover) {
+    body:hover #background-hover {
+        display: block;
+    }
+}
+
+/* mobile specific media queries */
+@media screen and (max-width: 480px) {
+
+}

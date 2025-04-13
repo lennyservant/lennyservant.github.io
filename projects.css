@@ -1,0 +1,57 @@
+/* trying out nested selectors */
+main section {
+    margin: 0.5rem;
+    padding: 1rem;
+    border-radius: 2rem;
+    backdrop-filter: blur(64px);
+    background: color(from var(--text-400) srgb r g b / 0.1);
+
+    /* big header on top */
+    h1 {
+        font-size: 1.75em;
+        margin-bottom: 1rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 1px var(--text-800) solid;
+    }
+
+    /* style articles inside our section */
+    & article {
+        
+        /* setup our layout */
+        display: grid;
+        grid-template-columns: 16rem 1fr;
+        text-wrap: pretty;
+        border-bottom: 1px var(--text-800) solid;
+
+        /* add some margin above and below our heading */
+        & h2 {
+            margin-block: 0.5rem;
+        }
+
+        /* ensure that img covers the entirity of figure */
+        & figure {
+            /* maximum of 20 rem; without this the image is too large */
+            max-width: 20rem;
+            overflow: hidden;
+            img {
+                object-fit: cover;
+                width: 100%;
+            }
+        }
+
+        /* wrapper; for separating the figure + header and the description */
+        & div {
+            display: grid;
+            justify-content: center;
+        }
+    }
+    /* breakpoint; switch to vertical layout */
+    @media (max-width: 768px) {
+        & article {
+            grid-template-columns: none;
+            grid-template-rows: fit-content 1fr;
+            justify-content: center;
+            text-align: center;
+        }
+    }
+}

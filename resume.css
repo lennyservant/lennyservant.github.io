@@ -1,0 +1,102 @@
+/* set up different areas of the resume */
+main {
+    padding: 0.5rem;
+    gap: 0.5rem;
+    display: grid;
+    grid-template-columns: min-content 1fr;
+    grid-template-areas: "about summary"
+    "about education"
+    "about certification"
+    "about skills";
+}
+
+/* section styling */
+main>section {
+    padding: 1rem;
+    border-radius: 2rem;
+    backdrop-filter: blur(64px);
+    background: color(from var(--text-400) srgb r g b / 0.1);
+    text-wrap: pretty;
+
+    &>h2 {
+        margin-bottom: 1rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 1px var(--text-800) solid;
+    }
+
+    & article {
+        display: grid;
+        gap: 1rem;
+    }
+
+    p {
+        margin: 0;
+    }
+}
+
+/* define classes with grid-areas that we can use in the html */
+.about {
+    grid-area: about;
+    & article {
+        grid-template-areas: 
+        "figure"
+        "contact"
+        "info";
+
+        /* same thing as above, but for the about subarea instead */
+        & .figure {
+            grid-area: figure;
+        }
+        
+        & .contact {
+            grid-area: contact;
+        }
+        
+        & .info {
+            grid-area: info;
+        }
+    } 
+}
+
+.summary {
+    grid-area: summary;
+    
+}
+
+.education {
+    grid-area: education;
+}
+
+.certification {
+    grid-area: certification;
+}
+
+.skills {
+    grid-area: skills;
+}
+
+/* breakpoint, switch to vertical layout */
+@media (max-width: 768px) {
+    main {
+        grid: 
+        "about" 
+        "summary" 
+        "education" 
+        "certification" 
+        "skills";
+    }   
+
+    /* switch to vertical layout and reduce img size */
+    .about>article {
+        grid-template-columns: min-content 1fr;
+        grid-template-areas: 
+        "figure contact"
+        "info info";
+        & figure {
+            & img {
+                max-width: 8rem;
+            }
+        }
+    }
+}
+
